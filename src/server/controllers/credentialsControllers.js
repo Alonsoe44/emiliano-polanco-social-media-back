@@ -50,6 +50,7 @@ const registerController = async (req, res, next) => {
         name,
         username,
         password: hashedPassword,
+        connections: [],
       };
 
       const createdUser = await User.create(newUser);

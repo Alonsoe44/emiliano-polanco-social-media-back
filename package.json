@@ -25,7 +25,8 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/**/*.test.js",
-      "!src/index.js"
+      "!src/index.js",
+      "!src/server/startServer.js"
     ]
   },
   "dependencies": {

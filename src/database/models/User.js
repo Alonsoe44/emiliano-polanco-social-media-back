@@ -13,6 +13,14 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  connections: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+      },
+      friendly: Boolean,
+    },
+  ],
 });
 
 const User = model("User", UserSchema, "Users");
