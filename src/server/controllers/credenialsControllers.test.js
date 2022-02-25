@@ -6,7 +6,7 @@ const {
   registerController,
 } = require("./credentialsControllers");
 
-jest.mock("../../dataBase/models/User");
+jest.mock("../../database/models/User");
 
 describe("Given a loginController", () => {
   describe("When it receives a req a username and password that matches the database", () => {
