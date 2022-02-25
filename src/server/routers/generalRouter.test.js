@@ -59,7 +59,6 @@ describe("Given a / endpoint", () => {
 
   describe("When it receive valid credentials", () => {
     test("Then it should return a token", async () => {
-      jest.setTimeout(20000);
       const userCredentials = {
         username: "normalUser",
         password: "iamsecure",
