@@ -6,6 +6,7 @@ const User = require("../../database/models/User");
 const app = require("../index");
 
 let mongoServer;
+let initialToken;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -17,6 +18,21 @@ beforeAll(async () => {
     password: "$2b$10$mKBXw7GhooAwOTySr8HOFODbxJse18IfwLGB3BgfadhtzGYXyAPvS",
     name: "iamaName",
   });
+
+  User.create({
+    username: "normalUser2",
+    password: "$2b$10$mKBXw7GhooAwOTySr8HOFODbxJse18IfwLGB3BgfadhtzGYXyAPvS",
+    name: "iamaName",
+  });
+
+  const userCredentials = {
+    username: "normalUser2",
+    password: "iamsecure",
+  };
+
+  const { body } = await request(app).post("/").send(userCredentials);
+
+  initialToken = body.token;
 });
 
 afterAll(async () => {
@@ -105,6 +121,18 @@ describe("Given a /register endpoint", () => {
         .expect(400);
 
       expect(body.message).toBe(expectedMessage);
+    });
+  });
+});
+
+describe("Given a /home endpoint", () => {
+  describe("When it receives a valid token", () => {
+    test("Then it should return all the users", async () => {
+      const { body } = await request(app)
+        .get("/home")
+        .set("Authorization", `Bearer ${initialToken}`);
+
+      expect(body.users).toHaveLength(3);
     });
   });
 });

@@ -7,13 +7,17 @@ const tokenValidator = async (req, res, next) => {
     error.status = 401;
     next(error);
   } else {
-    const token = headerAuth.replace("Bearer ", "");
     try {
-      jsonwebtoken.verify(token, process.env.SECRET_HEHE);
+      const token = headerAuth.replace("Bearer ", "");
+      jsonwebtoken.verify(token, process.env.SECRET_JWT);
+      // eslint-disable-next-line no-unused-vars
+      const { _id } = jsonwebtoken.decode(token, { payload: true });
+      req.userId = _id;
       next();
     } catch (error) {
+      const myError = new Error("No token");
       error.status = 401;
-      next(error);
+      next(myError);
     }
   }
 };
