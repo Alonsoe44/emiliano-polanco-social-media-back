@@ -5,6 +5,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+
+  lastName: String,
+  email: String,
+  birthDate: String,
   username: {
     type: String,
     required: true,
@@ -18,7 +22,7 @@ const UserSchema = new Schema({
       userId: {
         type: Schema.Types.ObjectId,
       },
-      friendly: Boolean,
+      relation: String,
     },
   ],
 });
