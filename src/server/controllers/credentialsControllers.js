@@ -18,6 +18,10 @@ const loginController = async (req, res, next) => {
     if (passwordMatch) {
       const payloadUser = {
         name: userFounded.name,
+        lastName: userFounded.lastName,
+        email: userFounded.email,
+        birthDate: userFounded.birthDate,
+        username: userFounded.username,
         // eslint-disable-next-line no-underscore-dangle
         _id: userFounded._id,
       };
@@ -59,6 +63,10 @@ const registerController = async (req, res, next) => {
       const createdUser = await User.create(newUser);
       const payloadUser = {
         name: createdUser.name,
+        lastName: createdUser.lastName,
+        email: createdUser.email,
+        birthDate: createdUser.birthDate,
+        username: createdUser.username,
         // eslint-disable-next-line no-underscore-dangle
         _id: createdUser._id,
       };
