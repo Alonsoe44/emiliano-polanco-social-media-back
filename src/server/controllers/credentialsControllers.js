@@ -32,7 +32,7 @@ const loginController = async (req, res, next) => {
 };
 
 const registerController = async (req, res, next) => {
-  const { name, username, password } = req.body;
+  const { name, username, password, lastName, email, birthDate } = req.body;
   if (!name || !username || !password) {
     const error = new Error("You must have a name, username and password");
     error.status = 400;
@@ -48,7 +48,10 @@ const registerController = async (req, res, next) => {
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = {
         name,
+        lastName,
         username,
+        email,
+        birthDate,
         password: hashedPassword,
         connections: [],
       };
