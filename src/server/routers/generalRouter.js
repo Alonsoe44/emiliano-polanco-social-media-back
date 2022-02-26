@@ -9,7 +9,7 @@ const {
 } = require("../controllers/usersControllers");
 const { tokenValidator } = require("../middlewares/tokenValidator");
 
-generalRouter.post("/", loginController);
+generalRouter.post("", loginController);
 generalRouter.post("/register", registerController);
 generalRouter.get("/home", tokenValidator, getUsersController);
 generalRouter.patch("/edit-profile", tokenValidator, editProfileController);
