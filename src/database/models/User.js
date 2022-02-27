@@ -19,9 +19,7 @@ const UserSchema = new Schema({
   },
   connections: [
     {
-      userId: {
-        type: Schema.Types.ObjectId,
-      },
+      userId: String,
       relation: String,
     },
   ],
